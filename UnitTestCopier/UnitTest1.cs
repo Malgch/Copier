@@ -53,24 +53,24 @@ namespace ver1UnitTests
         }
 
 
-        //// weryfikacja, czy po wywo³aniu metody `Print` i w³¹czonej kopiarce w napisie pojawia siê s³owo `Print`
-        //// wymagane przekierowanie konsoli do strumienia StringWriter
-        //[TestMethod]
-        //public void Copier_Print_DeviceOn()
-        //{
-        //    var copier = new Copier();
-        //    copier.PowerOn();
+        // weryfikacja, czy po wywo³aniu metody `Print` i w³¹czonej kopiarce w napisie pojawia siê s³owo `Print`
+        // wymagane przekierowanie konsoli do strumienia StringWriter
+        [TestMethod]
+        public void Copier_Print_DeviceOn()
+        {
+            var copier = new Copier();
+            copier.PowerOn();
 
-        //    var currentConsoleOut = Console.Out;
-        //    currentConsoleOut.Flush();
-        //    using (var consoleOutput = new ConsoleRedirectionToStringWriter())
-        //    {
-        //        IDocument doc1 = new PDFDocument("aaa.pdf");
-        //        copier.Print(in doc1);
-        //        Assert.IsTrue(consoleOutput.GetOutput().Contains("Print"));
-        //    }
-        //    Assert.AreEqual(currentConsoleOut, Console.Out);
-        //}
+            var currentConsoleOut = Console.Out;
+            currentConsoleOut.Flush();
+            using (var consoleOutput = new ConsoleRedirectionToStringWriter())
+            {
+                IDocument doc1 = new PDFDocument("aaa.pdf");
+                copier.Print(in doc1);
+                Assert.IsTrue(consoleOutput.GetOutput().Contains("Print"));
+            }
+            Assert.AreEqual(currentConsoleOut, Console.Out);
+        }
 
         //// weryfikacja, czy po wywo³aniu metody `Print` i wy³¹czonej kopiarce w napisie NIE pojawia siê s³owo `Print`
         //// wymagane przekierowanie konsoli do strumienia StringWriter

@@ -3,53 +3,93 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ver1.IDocument;
 
 namespace ver1
 {
     public class Copier : IPrinter, IScanner
     {
-        public int PrintCounter { get; init; }
+        private int PrintCounter { get; set; }
 
-        public int ScanCounter { get; init; }
+        private int ScanCounter { get; set; }
 
-        public int Counter { get; init; }
+        public int Counter { get; set; }
+
+
+        protected IDevice.State State = IDevice.State.off;
 
         public Copier()
         {
-            this.PrintCounter = 0;
-            this.Counter = 0;
-            this.ScanCounter = 0;
+            PrintCounter = 0;
+            Counter = PrintCounter + ScanCounter;
+            ScanCounter = 0;
         }
 
         public IDevice.State GetState()
         {
-            if( (((IScanner)this).GetState() == IDevice.State.off))
-                return IDevice.State.off;
-            if ((((IPrinter)this).GetState() == IDevice.State.off))
-                return IDevice.State.off;
-            return IDevice.State.on;
+            return State;
         }
 
 
         public void PowerOff()
         {
-            //IScanner.State = IDevice.State.off;
+            if (State == IDevice.State.off)
+                return;
+
+            State = IDevice.State.off;
             Console.WriteLine("Device is off ...");
         }
 
         public void PowerOn()
         {
-            throw new NotImplementedException();
+            if (State == IDevice.State.on)
+                return;
+
+            State = IDevice.State.on;
+            Console.WriteLine("Device is on ...");
         }
 
         public void Print(in IDocument document)
         {
-            throw new NotImplementedException();
+            if (State == IDevice.State.off)
+            {
+                Console.WriteLine("Copier is off");
+                return;
+            }
+
+            Console.WriteLine($"{DateTime.Now} Print: {document.GetFileName}.{document.GetFormatType}");
+            return;
         }
 
         public void Scan(out IDocument document, IDocument.FormatType formatType)
         {
-            throw new NotImplementedException();
+            ScanCounter++;
+            Counter++;
+
+            switch (formatType)
+            {
+                case FormatType.PDF:
+                    document = new PDFDocument($"PDFScan{ScanCounter}.{formatType}");
+                    break;
+                case FormatType.TXT:
+                    document = new TextDocument($"TextScan{ScanCounter}.{formatType}");
+                    break;
+                case FormatType.JPG:
+                    document = new ImageDocument($"ImageScan{ScanCounter}.{formatType}");
+                    break;
+            }
+
+            if (State == IDevice.State.off)
+            {
+                document = new PDFDocument("null");
+                return;
+            }
+            document = new ImageDocument($"ImageScan{ScanCounter}.{formatType}");
+
+
         }
+
+
+
     }
 }
