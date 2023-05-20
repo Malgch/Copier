@@ -3,13 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zadanie1", "Copier\Zadanie1.csproj", "{82BD032F-3489-418F-8726-76A32AEAC15D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zadanie1", "Copier\Zadanie1.csproj", "{82BD032F-3489-418F-8726-76A32AEAC15D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zadanie2", "Zadanie2\Zadanie2.csproj", "{BA795B15-85D5-4830-BB17-9D1F7FEC0785}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zadanie2", "Zadanie2\Zadanie2.csproj", "{BA795B15-85D5-4830-BB17-9D1F7FEC0785}"
+	ProjectSection(ProjectDependencies) = postProject
+		{82BD032F-3489-418F-8726-76A32AEAC15D} = {82BD032F-3489-418F-8726-76A32AEAC15D}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zadanie3", "Zadanie3\Zadanie3.csproj", "{FDBCD43A-8F76-408D-945E-5BD57CA70BD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zadanie3", "Zadanie3\Zadanie3.csproj", "{FDBCD43A-8F76-408D-945E-5BD57CA70BD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestCopier", "UnitTestCopier\UnitTestCopier.csproj", "{DEFD3576-37D2-4663-A51E-E1DE7F7C64EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestCopier", "UnitTestCopier\UnitTestCopier.csproj", "{DEFD3576-37D2-4663-A51E-E1DE7F7C64EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -12,11 +12,11 @@ namespace ver1
 {
     public class Copier : IPrinter, IScanner
     {
-        public int PrintCounter { get; set; }
+        public int PrintCounter { get; protected set; }
 
-        public int ScanCounter { get; set; }
+        public int ScanCounter { get; protected set; }
 
-        public int Counter { get; set; }
+        public int Counter { get; protected set; }
 
 
         protected IDevice.State State = IDevice.State.off;
@@ -24,14 +24,11 @@ namespace ver1
         public Copier()
         {
             PrintCounter = 0;
-            Counter = PrintCounter + ScanCounter;
+            Counter = 0;
             ScanCounter = 0;
         }
 
-        public IDevice.State GetState()
-        {
-            return State;
-        }
+        public IDevice.State GetState() => State;
 
 
         public void PowerOff()
@@ -57,7 +54,7 @@ namespace ver1
         {
             if (State == IDevice.State.off)
             {
-                Console.WriteLine("Copier is off");
+                Console.WriteLine("Device is off");
                 return;
             }
             PrintCounter++;
