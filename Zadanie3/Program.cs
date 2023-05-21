@@ -25,6 +25,21 @@ namespace Zadanie3
             System.Console.WriteLine(xerox.ScanCounter);
 
             Console.WriteLine($"{DateTime.Now}");
+
+
+            var mfDevice = new MultifunctionalDevice();
+            mfDevice.PowerOn();
+            mfDevice.Print(in doc1);
+            IDocument doc3;
+            mfDevice.Scan(out doc3);
+            mfDevice.ScanAndPrint();
+
+            mfDevice.FaxReceive(out doc3);
+            mfDevice.FaxSend(doc3);
+            System.Console.WriteLine(mfDevice.Counter);
+            System.Console.WriteLine(mfDevice.PrintCounter);
+            System.Console.WriteLine(mfDevice.ScanCounter);
+
         }
     }
 }
