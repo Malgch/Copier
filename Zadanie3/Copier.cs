@@ -24,7 +24,7 @@ namespace Zadanie3
         #region switch ON/OFF //Copier is on if Printer or Scaner are "on".
         public void PowerOn()
         {
-            if (State == IDevice.State.on)
+            if (State == IDevice.State.on && printer.GetState() == IDevice.State.on && scaner.GetState() == IDevice.State.on)
                 return;
 
             scaner.PowerOn();
@@ -34,15 +34,20 @@ namespace Zadanie3
         }
         public void SwitchOnPrinter() 
         {
+            if (printer.GetState() == IDevice.State.on)
+                return;
+
             printer.PowerOn();
             State = IDevice.State.on;
             Counter++;
         }
         public void SwitchOnScaner()
         {
+            if (scaner.GetState() == IDevice.State.on)
+                return;
 
-            scaner.PowerOn();
             State = IDevice.State.on;
+            scaner.PowerOn();            
             Counter++;
         }
 
@@ -101,12 +106,14 @@ namespace Zadanie3
 
         public void ScanAndPrint()
         {
-            if (printer.GetState() == IDevice.State.off || scaner.GetState() == IDevice.State.off)
+            if (printer.GetState() == IDevice.State.off || scaner.GetState() == IDevice.State.off || State == IDevice.State.off)
                 return;
 
             ScanCounter++;
             PrintCounter++;
-            var document = new ImageDocument($"ImageScan{ScanCounter}.jpg");
+
+            IDocument document = new ImageDocument("aaa.jpg");
+            scaner.Scan(out document, formatType: IDocument.FormatType.JPG);
             printer.Print(document);
         }
 

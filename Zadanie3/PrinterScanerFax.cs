@@ -7,6 +7,7 @@ using ver3;
 
 namespace Zadanie3
 {
+    #region Printer class
     public class Printer : BaseDevice, IPrinter
     {
         public int PrintCounter { get; protected set; } = 0;
@@ -28,7 +29,9 @@ namespace Zadanie3
             return;
         }
     }
+    #endregion
 
+    #region Scaner class
     public class Scaner : BaseDevice, IScanner
     {
         public int ScanCounter { get; protected set; } = 0;
@@ -76,6 +79,42 @@ namespace Zadanie3
             Console.WriteLine($"{DateTime.Now} Scan: {document.GetFileName().ToString()}");
         }
     }
+    #endregion
+
+    #region Fax class
+
+    public class Fax : BaseDevice, IFax
+    {
+        public int FaxCounter { get; protected set; } = 0;
+        public void FaxReceive(out IDocument document, IDocument.FormatType formatType)
+        {
+            if (state == IDevice.State.off)
+            {
+                document = new ImageDocument("");
+                return;
+            }
+            else
+            {
+                FaxCounter++;
+                document = new ImageDocument($"ImageFax{FaxCounter}.jpg");
+                Console.WriteLine($"{DateTime.Now} Received Fax: {document.GetFileName().ToString()}");
+            }
+        }
+
+        public void FaxSend(in IDocument document)
+        {
+            if (state == IDevice.State.off)
+            {
+                Console.WriteLine("Device is off");
+                return;
+            }
+
+            FaxCounter++;
+            Console.WriteLine($"{DateTime.Now} Sent Fax: {document.GetFileName().ToString()}");
+            return;
+        }
+    }
 
 
+    #endregion
 }

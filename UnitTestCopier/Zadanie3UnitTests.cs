@@ -283,5 +283,59 @@ namespace ver3UnitTests
             Assert.AreEqual(3, copier.Counter);
         }
 
+        [TestMethod]
+        public void Copier_ScanCounter_ScanerOff()
+        {
+            var copier = new Copier();
+            copier.PowerOn();
+            copier.SwitchOffScaner();
+
+            IDocument doc1;
+            copier.Scan(out doc1);
+            IDocument doc2;
+            copier.Scan(out doc2);
+
+            IDocument doc3 = new ImageDocument("aaa.jpg");
+            copier.Print(in doc3);
+
+            copier.PowerOff();
+            copier.SwitchOnScaner();
+            copier.Print(in doc3);
+            copier.Scan(out doc1);
+            copier.PowerOn();
+
+            copier.ScanAndPrint();
+            copier.ScanAndPrint();
+
+            // 3 skany, gdy urządzenie włączone
+            Assert.AreEqual(3, copier.ScanCounter);
+        }
+        [TestMethod]
+        public void Copier_PrintCounter_PrinterOff()
+        {
+            var copier = new Copier();
+            copier.PowerOn();
+            copier.SwitchOffPrinter();
+
+            IDocument doc1 = new ImageDocument("aaa.jpg");
+            copier.Print(in doc1);
+            copier.Print(in doc1);
+
+            IDocument doc3 = new ImageDocument("aaa.jpg");
+            copier.Print(in doc3);
+
+            copier.PowerOff();
+            copier.SwitchOnPrinter();
+            copier.Print(in doc3); //+1
+            copier.Scan(out doc1);
+            copier.PowerOn();
+
+            copier.ScanAndPrint(); //+1
+            copier.ScanAndPrint(); //+1
+
+            // 3 skany, gdy urządzenie włączone
+            Assert.AreEqual(3, copier.PrintCounter);
+        }
+
     }
 }
