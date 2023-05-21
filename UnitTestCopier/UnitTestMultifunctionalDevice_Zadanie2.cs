@@ -35,7 +35,7 @@ namespace UnitTestMultifunctionalDevice
 
 
         [TestClass]
-        public class UnitTestMultifunctionalDevice
+        public class UnitTestMultifunctionalDevice_Zadanie2
         {
             [TestMethod]
             public void MFDevice_GetState_StateOff()
