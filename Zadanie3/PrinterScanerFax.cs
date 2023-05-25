@@ -46,7 +46,6 @@ namespace Zadanie3
             else
             {
                 ScanCounter++;
-
                 document = new ImageDocument($"ImageScan{ScanCounter}.jpg");
                 Console.WriteLine($"{DateTime.Now} Scan: {document.GetFileName().ToString()}");
             }

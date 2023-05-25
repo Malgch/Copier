@@ -88,8 +88,8 @@ namespace Zadanie3
                 document = new ImageDocument("null");
                 return;
             }
-            scaner.Scan(out document);
             ScanCounter++;
+            scaner.Scan(out document);            
         }
 
         public void Scan(out IDocument document, IDocument.FormatType formatType)
@@ -99,9 +99,8 @@ namespace Zadanie3
                 document = new ImageDocument("null");
                 return;
             }
-
-            scaner.Scan(out document, formatType);
             ScanCounter++;
+            scaner.Scan(out document, formatType);            
         }
 
         public void ScanAndPrint()
